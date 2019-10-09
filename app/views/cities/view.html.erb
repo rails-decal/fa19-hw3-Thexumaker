@@ -1,0 +1,56 @@
+<h1>View</h1>
+<%= link_to '<button type="button">New</button>'.html_safe, cities_new_path%>
+<%exists = false %>
+<% if  @city.nil? %>
+<% City.all.values.each do |city| %>
+
+
+<p>
+  <b> Name:</b> <%= city.name %> <br>
+
+    <b> Population:</b> <%= city.population %> <br>
+  <b> Landmark: </b> <%= city.landmark %> <br>
+</p>
+<%= link_to '<button type="button">Update</button>'.html_safe, cities_update_path%>
+<%end%>
+    <%else%>
+    <% City.all.values.each do |city| %>
+
+
+
+    <%if city.name == @city%>
+
+
+    <% $name = city.name %>
+
+    <% $population = city.population %>
+    <% $landmark = city.landmark %>
+
+    <% exists = true%>
+    <%end%>
+    <%end%>
+
+    <%if exists %>
+
+
+  	<p>
+      <b> Name:</b> <%= $name %> <br>
+
+  	   	<b> Population:</b> <%= $population %> <br>
+  		<b> Landmark: </b> <%= $landmark %> <br>
+  	</p>
+
+  	<%= link_to '<button type="button">Update</button>'.html_safe,cities_update_path%>
+  <%else%>
+  <% City.all.values.each do |city| %>
+
+  <p>
+    <b> Name:</b> <%= city.name %> <br>
+    
+      <b> Population:</b> <%= city.population %> <br>
+    <b> Landmark: </b> <%= city.landmark %> <br>
+  </p>
+  <%= link_to '<button type="button">Update</button>'.html_safe,cities_update_path%>
+    <%end%>
+    <%end%>
+    <%end%>
